@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Discipline Log</title>
+    <style>
+      p {
+        color: green;
+      }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js"></script>
+    <?!= include('my_javascript_valid'); ?>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="header-row" id="header-row" style="padding: 0px; overflow:hidden; height:auto; margin-bottom: 20px;">
+       <div class="container" style="padding: 0px; background-color: #FCBF04;">
+          <div class="row"> 
+             <div class="col-sm-12" align="center"> 
+                <a class="navbar-brand logo" href="index.html">
+                   <img src="http://ofhsmath.com/online_forms/images/MS%20Discipline%20Report.png" alt="school banner" style="width: 100%;">
+                </a> 
+             </div>     
+          </div>
+       </div>
+    </div>
+    <div class="container">
+      <form id="discipline-form" class="needs-validation" novalidate>
+        <div class="form-group row">
+          <label for="studentName" class="col-sm-2 col-form-label">Student Name</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" name="studentName" id="studentName" placeholder="Last Name, First Name" required />
+            <div class="invalid-feedback">
+              Please enter a student name.
+            </div>
+          </div>
+        </div>
+        <fieldset class="form-group">
+          <div class="row">
+            <legend class="col-form-label col-sm-2 pt-0">Grade Level</legend>
+            <div class="col-sm-10">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="gradeLevel" id="gradeLevel6" value="6" checked>
+                <label class="form-check-label" for="gradeLevel6">6th</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="gradeLevel" id="gradeLevel7" value="7">
+                <label class="form-check-label" for="gradeLevel7">7th</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="gradeLevel" id="gradeLevel8" value="8">
+                <label class="form-check-label" for="gradeLevel8">8th</label>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <div class="form-group row"> <!-- Date input -->
+          <label for="date" class="col-sm-2 col-form-label">Date of Infraction</label>
+          <div class="col-sm-3">
+            <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="date"required />
+            <div class="invalid-feedback">
+              Please enter a date for the infraction.
+            </div>
+          </div>
+        </div>
+        <div class="form-group row"> <!-- Time input -->
+          <label for="time" class="col-sm-2 col-form-label">Time of Incident</label>
+          <div class="col-sm-3">
+            <input class="form-control" id="time" name="time" placeholder="--:--" type="time"/>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="location" class="col-sm-2 col-form-label">Location of Incident</label>
+          <div class="col-sm-8">
+            <select class="form-control" name="location" required>
+              <option disabled selected value> -- select an option -- </option>
+              <option value="Classroom" >Classroom</option>
+              <option value="Hallway" >Hallway</option>
+              <option value="Cafeteria" >Cafeteria</option>
+              <option value="Music Room" >Music Room</option>
+              <option value="Restroom" >Restroom</option>
+              <option value="Bus" >Bus</option>
+              <option value="Bus Zone" >Bus Zone</option>
+              <option value="Gymnasium" >Gymnasium</option>
+              <option value="Locker Room" >Locker Room</option>
+              <option value="Office" >Office</option>
+              <option value="Other">Other</option>
+            </select>
+            <div class="invalid-feedback">
+              Please select a location.
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="teacherName" class="col-sm-2 col-form-label">Teacher Name</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" name="teacherName" id="teacherName" placeholder="Last Name Only" required>
+            <div class="invalid-feedback">
+              Please enter a teacher's last name.
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="teacherEmail" class="col-sm-2 col-form-label">Teacher Email</label>
+          <div class="col-sm-10">
+            <input type="email" class="form-control" name="teacherEmail" id="teacherEmail" required>
+            <div class="invalid-feedback">
+              Please enter a valid email adress.
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-2">Home Communication</div>
+          <div class="col-sm-10">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="homeCommunication" name="homeCommunication" value="yes" required />
+              <label class="form-check-label" for="homeCommunication">Phone communication with parent/guardian?</label>
+              <div class="invalid-feedback">
+                You must check this box to indicate you have had home communication.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="communicationDetails" class="col-sm-2 col-form-label">Communication Details</label>
+          <div class="col-sm-10">
+            <textarea class="form-control" id="communicationDetails" name="communicationDetails" rows="3"></textarea>
+          </div>
+        </div>
+        <fieldset class="form-group">
+          <div class="row">
+            <legend class="col-form-label col-sm-2 pt-0">Infraction(s)</legend>
+            <div class="col-sm-10" id="infractionCheck">
+              <div class="form-check">
+                <input class="form-check-input check2" type="checkbox" name="infraction" id="infraction1" value="Absent/Late to Class or School">
+                <label class="form-check-label" for="infraction1">Absent/Late to Class or School</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input check2" type="checkbox" name="infraction" id="infraction2" value="High intensity disrespect to staff">
+                <label class="form-check-label" for="infraction2">High intensity disrespect to staff</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input check2" type="checkbox" name="infraction" id="infraction3" value="Disruption of Education">
+                <label class="form-check-label" for="infraction3">Disruption of Education</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input check2" type="checkbox" name="infraction" id="infraction4" value="Failure to report for detention">
+                <label class="form-check-label" for="infraction4">Failure to report for detention</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input check2" type="checkbox" name="infraction" id="infraction5" value="Failure to follow class rules">
+                <label class="form-check-label" for="infraction5">Failure to follow class rules</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input check2" type="checkbox" name="infraction" id="infraction6" value="Harrassment">
+                <label class="form-check-label" for="infraction6">Harrassment</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input check2" type="checkbox" name="infraction" id="infraction7" value="Horseplay">
+                <label class="form-check-label" for="infraction7">Horseplay</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input check2" type="checkbox" name="infraction" id="infraction8" value="Insubordination">
+                <label class="form-check-label" for="infraction8">Insubordination</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input check2" type="checkbox" name="infraction" id="infraction9" value="High intensity profanity">
+                <label class="form-check-label" for="infraction9">High intensity profanity</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input check2" type="checkbox" name="infraction" id="infraction10" value="Possession/Use/Sale of alcohol/drugs/tobacco/counterfeit">
+                <label class="form-check-label" for="infraction10">Possession/Use/Sale of alcohol/drugs/tobacco/counterfeit</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input check2" type="checkbox" name="infraction" id="infraction11" value="Participation in a physical altercation" />
+                <label class="form-check-label" for="infraction11">Participation in a physical altercation</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input check2" type="checkbox" name="infraction" id="infraction12" value="Threatening harm to students or staff" />
+                <label class="form-check-label" for="infraction12">Threatening harm to students or staff</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input check2" type="checkbox" name="infraction" id="infraction13" value="Vandalism" />
+                <label class="form-check-label" for="infraction13">Vandalism</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input check2" type="checkbox" name="infraction" id="infraction14" value="Other" />
+                <label class="form-check-label" for="infraction14">Other</label>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <div class="form-group row">
+          <label for="infractionDescription" class="col-sm-2 col-form-label">Description</label>
+          <div class="col-sm-10">
+            <textarea class="form-control" name="infractionDescription" id="infractionDescription" rows="3" required></textarea>
+            <div class="invalid-feedback">
+              Please provide a brief description of the incident.
+            </div>
+          </div>
+        </div>
+        <fieldset class="form-group">
+          <div class="row">
+            <legend class="col-form-label col-sm-2 pt-0">Previous Action(s) Taken to Obtain Improvement</legend>
+            <div class="col-sm-10" id="actionCheck">
+              <div class="form-check">
+                <input class="form-check-input check1" type="checkbox" name="action" id="action1" value="Assigned different seat" >
+                <label class="form-check-label" for="action1">Assigned different seat</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input check1" type="checkbox" name="action" id="action2" value="Behavior Contract">
+                <label class="form-check-label" for="action2">Behavior Contract</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input check1" type="checkbox" name="action" id="action3" value="Called home">
+                <label class="form-check-label" for="action3">Called home</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input check1" type="checkbox" name="action" id="action4" value="Conference with Student">
+                <label class="form-check-label" for="action4">Conference with Student</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input check1" type="checkbox" name="action" id="action5" value="Conference with team teachers">
+                <label class="form-check-label" for="action5">Conference with team teachers</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input check1" type="checkbox" name="action" id="action6" value="Conference with parent">
+                <label class="form-check-label" for="action6">Conference with parent</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input check1" type="checkbox" name="action" id="action7" value="Detention">
+                <label class="form-check-label" for="action7">Detention</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input check1" type="checkbox" name="action" id="action8" value="Exclusion from participation">
+                <label class="form-check-label" for="action8">Exclusion from participation</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input check1" type="checkbox" name="action" id="action9" value="Guidance referral">
+                <label class="form-check-label" for="action9">Guidance referral</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input check1" type="checkbox" name="action" id="action10" value="Warning">
+                <label class="form-check-label" for="action10">Warning</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input check1" type="checkbox" name="action" id="action11" value="Other">
+                <label class="form-check-label" for="action11" required>Other</label>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <div class="form-group row">
+          <label for="otherComments" class="col-sm-2 col-form-label">Other information or comments</label>
+          <div class="col-sm-10">
+            <textarea class="form-control" name="otherComments" id="otherComments" rows="3"></textarea>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="adminFeedback" class="col-sm-2 col-form-label">Administrator Feedback</label>
+          <div class="col-sm-10">
+            <textarea class="form-control" name="adminFeedback" id="adminFeedback" rows="3"></textarea>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-10" align="center">
+            <button type="submit" class="btn btn-primary" id="btnSubmit">Submit Form</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
+
+
+

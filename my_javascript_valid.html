@@ -1,0 +1,113 @@
+<script>
+  (function() {
+    'use strict';
+    window.addEventListener('load', function() {
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.getElementsByClassName('needs-validation');
+      // Loop over them and prevent submission
+      var validation = Array.prototype.filter.call(forms, function(form) {
+        form.addEventListener('submit', function(event) {
+          var actionCheckbox1 = document.getElementsByClassName("check1");
+          var actionCheckbox2 = document.getElementsByClassName("check2");
+          var divtemp1 = document.getElementById('noinfract');
+          var divtemp2 = document.getElementById('noaction');
+          
+          // get reference to element containing toppings checkboxes
+          var icheck = document.getElementById('infractionCheck');
+          var acheck = document.getElementById('actionCheck');
+          // get reference to input elements in toppings container element
+          var infracts = icheck.getElementsByTagName('input');
+          var acts = acheck.getElementsByTagName('input');
+        
+          // assign function to onclick property of each checkbox
+          for (var i=0, len=infracts.length; i<len; i++) {
+            if ( infracts[i].type === 'checkbox' ) {
+              infracts[i].onclick = function() {
+                // put your awesome code here
+                divtemp1.style.display = "none";
+                
+              }
+            }
+          }
+          for (var i=0, len=acts.length; i<len; i++) {
+            if ( acts[i].type === 'checkbox' ) {
+              acts[i].onclick = function() {
+                // put your awesome code here
+                divtemp2.style.display = "none";
+                
+              }
+            }
+          }
+            
+          var checkedOne2 = Array.prototype.slice.call(actionCheckbox2).some(x => x.checked);
+          var checkedOne1 = Array.prototype.slice.call(actionCheckbox1).some(x => x.checked);
+          console.log(checkedOne2);
+          console.log(checkedOne1);
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          } else if (checkedOne1 === false) {
+            event.preventDefault();
+            divtemp2.style.display = "block";
+            divtemp2.innerHTML = "<span style='color:#FF0000'>You must select at least one previous action taken prior to referral.</span>";
+            event.stopPropagation();
+            var x = document.getElementById('actionColor');
+            x.style.color = '#FF0000';
+            console.log(x.style.color);
+          } else if (checkedOne2 === false) {
+            event.preventDefault();
+            divtemp1.style.display = "block";
+            divtemp1.innerHTML = "<span style='color:#FF0000'>You must select at least one infraction.</span>";
+            event.stopPropagation();
+          }
+          else {submit(event);}
+          form.classList.add('was-validated');
+        }, false);
+        
+      });
+    }, false);
+  })();
+
+  function submit(e) {
+    e.preventDefault();
+    
+    const form = document.getElementsByClassName('needs-validation')[0];
+    const data = formToJSON(form.elements);
+    var dataToSend = JSON.stringify(data, null, "  ");
+    console.log(dataToSend);
+    google.script.run
+      .withSuccessHandler(onSuccess)
+      .withUserObject(this)
+      .submitReport(dataToSend);
+  }
+  function onSuccess() {
+    var div = document.getElementById('output');
+    div.innerHTML = 'THANK YOU!';
+  }
+  const formToJSON = elements => [].reduce.call(elements, (data, element) => {
+    // Make sure the element has the required properties.
+    if (isValidElement(element) && isValidValue(element)) {
+      /*
+       * Some fields allow for more than one value, so we need to check if this
+       * is one of those fields and, if so, store the values as an array.
+       */
+      if (isCheckbox(element)) {
+        data[element.name] = (data[element.name] || []).concat(element.value);
+      } else {
+        data[element.name] = element.value;
+      }
+    }
+    return data;
+  }, {});
+  
+  const isValidElement = element => {
+    return element.name;
+  };
+  const isValidValue = element => {
+    return (!['checkbox', 'radio'].includes(element.type) || element.checked);
+  };
+  const isCheckbox = element => element.type === 'checkbox';
+  const isMultiSelect = element => element.options && element.multiple;
+  
+  
+</script>
